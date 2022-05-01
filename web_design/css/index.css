@@ -1,0 +1,12 @@
+#menu {
+    text-align: right;
+}
+.menu_btn {
+    margin-left: 10px;
+    margin-right: 10px;
+    border: none;
+    background: none;
+}
+#menu_hr {
+    color: gray;
+}
