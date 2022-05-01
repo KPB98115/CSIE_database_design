@@ -1,5 +1,9 @@
+body {
+    background-color: lightgray;
+}
+
 #menu {
-    text-align: right;
+    text-align: center;
 }
 .menu_btn {
     margin-left: 10px;
@@ -9,4 +13,22 @@
 }
 #menu_hr {
     color: gray;
+}
+#gallery {
+    margin: auto;
+    display: grid;
+}
+#features_gallery {
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 10px;
+    margin: auto;
+}
+.features {
+    background-color: white;
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
 }
