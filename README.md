@@ -8,6 +8,7 @@ pip install mysqlclient
 ```
 
 ## Beautiful Soup installation
+via %appdata%/.../where your python install/script ---> open cmd
 ```
 pip install beautifulsoup4
 ```
