@@ -7,12 +7,6 @@ via %appdata%/.../where your python install/script ---> open cmd
 pip install mysqlclient
 ```
 
-## Beautiful Soup installation
-via %appdata%/.../where your python install/script ---> open cmd
-```
-pip install beautifulsoup4
-```
-
 ## Chromedriver installation
 GO -> https://chromedriver.chromium.org/downloads
 ### Current Releases
