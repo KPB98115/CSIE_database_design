@@ -1,5 +1,6 @@
 #import required module and set configuration
 from MySQLdb import _mysql
+from MySQLdb import Error
 import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -31,22 +32,25 @@ database = 'test'
 
 table = "垃圾車停靠地點"
 primary_key_atr = "truck_no"
-row_count = 10;
+row_count = 10
 
-conn = _mysql.connect(host, username, password, database)
+try:
+    conn = _mysql.connect(host, username, password, database)
 
-#fetch data from databse
-conn.query("""SELECT address, truck_no FROM `垃圾車停靠地點` """)
-result = conn.store_result().fetch_row(row_count)
+    #fetch data from databse
+    conn.query("""SELECT address, truck_no FROM `垃圾車停靠地點` """)
+    result = conn.store_result().fetch_row(row_count)
 
-#processing data
-for row in range(row_count):
-    coordinate = get_url_coordinate(result[row][0].decode("UTF-8"))
-    lat = coordinate[0]
-    log = coordinate[1]
-    print(str(lat)+" "+str(log))
-    pk = result[row][1].decode("UTF-8")
-    print("sql query : "+f"UPDATE `{table}` SET `longitude` = '{lat}', `Latitude` = '{log}' WHERE `{table}`.`{primary_key_atr}` = '{pk}'")
-    conn.query(f"UPDATE `{table}` SET `longitude` = '{log}', `Latitude` = '{lat}' WHERE `{table}`.`{primary_key_atr}` = '{pk}'")
+    #processing data
+    for row in range(row_count):
+        coordinate = get_url_coordinate(result[row][0].decode("UTF-8"))
+        lat = coordinate[0]
+        log = coordinate[1]
+        print(str(lat)+" "+str(log))
+        pk = result[row][1].decode("UTF-8")
+        print("sql query : "+f"UPDATE `{table}` SET `longitude` = '{lat}', `Latitude` = '{log}' WHERE `{table}`.`{primary_key_atr}` = '{pk}'")
+        conn.query(f"UPDATE `{table}` SET `longitude` = '{log}', `Latitude` = '{lat}' WHERE `{table}`.`{primary_key_atr}` = '{pk}'")
 
-conn.close()
+    conn.close()
+except Error:
+    print("invalid database configuration")
