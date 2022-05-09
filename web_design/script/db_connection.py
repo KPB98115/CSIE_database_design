@@ -48,7 +48,7 @@ try:
         log = coordinate[1]
         print(str(lat)+" "+str(log))
         pk = result[row][1].decode("UTF-8")
-        print("sql query : "+f"UPDATE `{table}` SET `longitude` = '{lat}', `Latitude` = '{log}' WHERE `{table}`.`{primary_key_atr}` = '{pk}'")
+        print("sql query : "+f"UPDATE `{table}` SET `longitude` = '{log}', `Latitude` = '{lat}' WHERE `{table}`.`{primary_key_atr}` = '{pk}'")
         conn.query(f"UPDATE `{table}` SET `longitude` = '{log}', `Latitude` = '{lat}' WHERE `{table}`.`{primary_key_atr}` = '{pk}'")
 
     conn.close()
