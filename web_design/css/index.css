@@ -6,32 +6,83 @@ body {
     text-align: center;
 }
 .menu_btn {
-    margin-left: 10px;
-    margin-right: 10px;
+    font-size: medium;
+    width: 100px;
+    height: 50px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 20px;
+    margin-right: 20px;
     border: none;
     background: none;
 }
 #menu_hr {
     color: gray;
 }
+#map {
+    position: absolute;
+    left: 0;
+    bottom: 20%;
+    top: 20%;
+}
+#map_btn {
+    position: relative;
+    top: 40%;
+    font-size: medium;
+    height: 50px;
+}
+#map_btn_off {
+    position: relative;
+    bottom: 60%;
+    font-size: medium;
+    height: 50px;
+}
+iframe {
+    display: none;
+}
 #gallery {
     margin: auto;
-    display: grid;
+    display: flex;
+    justify-content: center;
 }
-#features_gallery {
+#form_gallery {
     text-align: center;
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
+    display: inline-flex;
     gap: 10px;
-    margin: auto;
 }
-.features {
+.queryForm {
     background-color: white;
-    width: 300px;
-    height: 300px;
+    width: 320px;
+    height: 800px;
     border-radius: 10px;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
+    display: grid;
+    grid-template-rows: 5% 95%;
 }
 #temp_form {
     margin-top: 100px;
+    padding-top: 100px;
+}
+#addForm {
+    width: auto;
+    height: 100px;
+    margin-top: 350px;
+    margin-left: 10px;
+    border: none;
+    background: none;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
+}
+.cancelForm_btn {
+    margin-top: 5px;
+    margin-left: 90%;
+    border: none;
+    background: none;
+}
+#cancel_btn1 {
+    display: none;
+}
+
+.street_no {
+    width: 70px;
 }

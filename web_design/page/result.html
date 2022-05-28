@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result Page template</title>
+    <link rel="stylesheet" href="../css/result.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="../script/result.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div id="header">
+            <div id="menu">
+                <button class="menu_btn" id="homePage">Home page</button>
+                <button class="menu_btn" id="aboutUs">About us</button>
+                <button class="menu_btn" id="reference">Reference</button>
+                <hr id="menu_hr">
+            </div>
+        </div>
+        <div class="query_result" id="result1">
+            <div id="map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d17195.415495820966!2d121.38879892154907!3d25.03779953574028!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a77b5cfba189%3A0x62bc289af4ecd083!2z6ZW35bqa5aSn5a24!5e0!3m2!1szh-TW!2stw!4v1653738720094!5m2!1szh-TW!2stw" width="800" height="800" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div id="info">
+                <h3 id="address"></h3>
+                <hr id="info_hr">
+                <div id="meal" class="category">
+                    <h6 id="title" class="details"></h6>
+                    <p id="amount" class="details"></p>
+                    <button class="more_btn" id="more_meal">More</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
