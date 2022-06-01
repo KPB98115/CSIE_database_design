@@ -8,14 +8,16 @@
     <link rel="stylesheet" href="../css/index.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="../script/index.js"></script>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
 <body>
     <div class="container">
         <div id="header">
             <div id="menu">
-                <button class="menu_btn" id="homePage">Home page</button>
-                <button class="menu_btn" id="aboutUs">About us</button>
-                <button class="menu_btn" id="reference">Reference</button>
+                <button class="btn btn-success" id="homePage">Home page</button>
+                <button class="btn btn-success" id="aboutUs">About us</button>
+                <button class="btn btn-success" id="reference">Reference</button>
                 <hr id="menu_hr">
             </div>
         </div>
@@ -25,7 +27,8 @@
                     <div><button id="cancel_btn1" class="cancelForm_btn" onclick="removeForm(this)"></button></div>
                     <div id="temp_form">
                         <form action="query" method="post">
-                            目標地址：<br><select id="district1" onchange="checkDistrict(this)">
+                            <label for="address" class="form-label">目標地址：</label>
+                            <select style="display: inline-flex; width: 80%;" class="form-select" id="district1" onchange="checkDistrict(this)">
                                 <option value="default" selected>請選擇區域</option>
                                 <option value="中正區">中正區</option>
                                 <option value="大同區">大同區</option>
@@ -40,21 +43,22 @@
                                 <option value="南港區">南港區</option>
                                 <option value="文山區">文山區</option>
                             </select>
-                            <select id="street1">
+                            <select style="display: inline-flex; width: 80%;" class="form-select" id="street1">
                                 <option value="default" selected>請選擇街道</option>
                             </select>
-                            <input type="text" class="street_no" id="street_no_1" placeholder="請輸入街號">
-                            <br>搜尋範圍：<select id="range1">
+                            <input type="text" class="input_no" id="street_no_1" placeholder="請輸入街號">
+                            <label for="range" class="form-label">搜尋範圍：</label>
+                            <select style="display: inline-flex; width: 80%;" class="form-select" id="range1">
                                 <option value="default" selected>請選擇距離</option>
                                 <option value="1">1公里</option>
                                 <option value="3">3公里</option>
                                 <option value="5">5公里</option>
                             </select>
-                            <br><input type="submit" value="submit" style="margin-top: 50px;">
+                            <br><input class="btn btn-primary" type="submit" type="submit" value="submit" style="margin-top: 50px;">
                         </form>
                     </div>
                 </div>
-                <button id="addForm" onclick="addForm()">新<br>增<br>比<br>較</button>
+                <button class="btn btn-outline-secondary" id="addForm" onclick="addForm()">新增比較</button>
             </div>
         </div>
     </div>

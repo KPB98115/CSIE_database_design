@@ -35,6 +35,7 @@ function addForm() {
                     </div>
                 </div>`;
     //var template = `<div class='queryForm' id='form${element_length+1}'><div><button id='cancel_btn${element_length+1}' class='cancelForm_btn' onclick='removeForm(this)'>X</button></div><div id='temp_form'><form action='query' method='post'><select name='district' id='district'><option value='default'>請選擇區域</option><option value='大安區'>大安區</option></select><select name='street' id='street'><option value='default'>請選擇街道</option><option value='林森一路'>林森一路</option></select><br><input type='submit' value='submit' style='margin-top: 50px;'></form></div>`
+    $("#addForm").blur();
 
     if (element_length == 4) {
         $("#gallery").find("#addForm").css("display", "none");

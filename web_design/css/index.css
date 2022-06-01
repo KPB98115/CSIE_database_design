@@ -18,6 +18,7 @@ body {
 }
 #menu_hr {
     color: gray;
+    width: 100%;
 }
 #map {
     position: absolute;
@@ -69,9 +70,10 @@ iframe {
     margin-top: 350px;
     margin-left: 10px;
     border: none;
-    background: none;
     border-radius: 10px;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
+    writing-mode: vertical-lr;
+    text-orientation: upright;
 }
 .cancelForm_btn {
     margin-top: 5px;
@@ -82,7 +84,6 @@ iframe {
 #cancel_btn1 {
     display: none;
 }
-
-.street_no {
-    width: 70px;
+.input_no {
+    width: 80%;
 }
