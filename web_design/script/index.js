@@ -1,11 +1,11 @@
 function addForm() {
     var element_length = $("#form_gallery").children("div").length;
-    console.log(element_length);
     var template = `<div class="queryForm" id="form${element_length+1}">
                     <div><button id="cancel_btn${element_length+1}" class="cancelForm_btn" onclick="removeForm(this)">X</button></div>
                     <div id="temp_form">
-                        <form action="query" method="post">
-                            目標地址：<br><select id="district${element_length+1}" onchange="checkDistrict(this)">
+                        <form action="" method="post">
+                            <label for="address" class="form-label">目標地址：</label>
+                            <select name="district" style="display: inline-flex; width: 80%;" class="form-select" id="district${element_length+1}" onchange="checkDistrict(this)">
                                 <option value="default" selected>請選擇區域</option>
                                 <option value="中正區">中正區</option>
                                 <option value="大同區">大同區</option>
@@ -20,21 +20,21 @@ function addForm() {
                                 <option value="南港區">南港區</option>
                                 <option value="文山區">文山區</option>
                             </select>
-                            <select id="street${element_length+1}">
+                            <select name="street" style="display: inline-flex; width: 80%;" class="form-select" id="street${element_length+1}">
                                 <option value="default" selected>請選擇街道</option>
                             </select>
-                            <input type="text" class="street_no" id="street_no_${element_length+1}" placeholder="請輸入街號">
-                            <br>搜尋範圍：<select id="range${element_length+1}">
+                            <input name="number" type="text" class="input_no" id="street_no_${element_length+1}" placeholder="請輸入街號">
+                            <label for="range" class="form-label">搜尋範圍：</label>
+                            <select name="range" style="display: inline-flex; width: 80%;" class="form-select" id="range${element_length+1}">
                                 <option value="default" selected>請選擇距離</option>
                                 <option value="1">1公里</option>
                                 <option value="3">3公里</option>
                                 <option value="5">5公里</option>
                             </select>
-                            <br><input type="submit" value="submit" style="margin-top: 50px;">
+                            <input id="submit_btn${element_length+1}" class="btn btn-primary" type="button" value="submit" style="margin-top: 50px;" onclick="submitQuery(this)">
                         </form>
                     </div>
                 </div>`;
-    //var template = `<div class='queryForm' id='form${element_length+1}'><div><button id='cancel_btn${element_length+1}' class='cancelForm_btn' onclick='removeForm(this)'>X</button></div><div id='temp_form'><form action='query' method='post'><select name='district' id='district'><option value='default'>請選擇區域</option><option value='大安區'>大安區</option></select><select name='street' id='street'><option value='default'>請選擇街道</option><option value='林森一路'>林森一路</option></select><br><input type='submit' value='submit' style='margin-top: 50px;'></form></div>`
     $("#addForm").blur();
 
     if (element_length == 4) {
@@ -48,11 +48,11 @@ function removeForm(element) {
     return $(`#${element.id}`).parent().parent().remove();
 }
 
-function checkDistrict(select_tag) {
-    var street_select_tag = $(`#${select_tag.id}`).next();
+function checkDistrict(element) {
+    var street_select_tag = $(`#${element.id}`).next();
     street_select_tag.blur();
     street_select_tag.find("option").not(":first").remove();
-    var district = $(`#${select_tag.id} option:selected`).val();
+    var district = $(`#${element.id} option:selected`).val();
     if (district == "松山區") {
         松山區.forEach(element => {
             street_select_tag.append(`<option value='${element}'>${element}</option>`);
@@ -127,3 +127,41 @@ var 南港區 = ['三重路', '中南街', '中坡北路', '中坡南路', '八�
 var 內湖區 = ['五分街', '內湖路１段', '內湖路２段', '內湖路３段', '南京東路６段', '基湖路', '堤頂大道１段', '堤頂大道２段', '大湖山莊街', '大湖街', '安康路', '安泰街', '安美街', '康寧路１段', '康寧路３段', '康樂街', '康湖路', '成功路２段', '成功路３段', '成功路４段', '成功路５段', '文德路', '文湖街', '新富街', '新明路', '新湖一路', '新湖三路', '新湖二路', '新豐街', '星雲街', '東湖路', '民善街', '民權東路６段', '永保街', '江南街', '洲子街', '港墘路', '港華街', '潭美街', '瑞光路', '瑞湖街', '環山路１段', '環山路２段', '環山路３段', '石潭路', '碧山路', '舊宗路１段', '舊宗路２段', '行善路', '行忠路', '行愛路', '金湖路', '金莊路', '金豐街', '金龍路', '陽光街', '麗山街'];
 var 士林區 = ['下樹林街', '中山北路４段', '中山北路５段', '中山北路６段', '中山北路７段', '中庸一路', '中庸二路', '中庸五路', '中正路', '中社路１段', '中社路２段', '中興街', '中華路', '仁民路', '仰德大道１段', '仰德大道２段', '仰德大道３段', '仰德大道４段', '倫等街', '光華路', '克強路', '凱旋路', '前港街', '前街', '劍南路', '劍潭路', '力行街', '和平路', '和豐街', '國泰街', '基河路', '士商路', '士東路', '大亨路', '大光街', '大北路', '大南路', '大東路', '大西路', '天母北路', '天母東路', '天母西路', '天玉街', '安平街', '小北街', '小南街', '小東街', '小西街', '平菁街', '幸福街', '延平北路５段', '延平北路６段', '延平北路７段', '延平北路８段', '延平北路９段', '建業路', '後港街', '後街', '德行東路', '德行西路', '志成街', '忠勇街', '忠義街', '忠誠路１段', '忠誠路２段', '愛富一街', '愛富三街', '愛富三街長生巷', '愛富二街', '愛富二街厚生巷', '愛富二街樂生巷', '承德路４段', '承德路５段', '故宮路', '文昌路', '文林路', '新園街', '新安路', '明溪街', '東山路', '格致路', '永公路', '永平街', '環河北路３段', '磺溪街', '社中街', '社子街', '社正路', '福國路', '福壽街', '福德路', '福志路', '福林路', '福榮街', '福港街', '福華路', '竹子湖路', '美崙街', '美德街', '翠山街', '臨溪路', '自祥街', '至善路１段', '至善路２段', '至善路３段', '至誠路１段', '至誠路２段', '芝玉路１段', '芝玉路２段', '莊頂路', '菁山路', '華光街', '華岡路', '華榮街', '華聲街', '華興街', '華齡街', '葫東街', '葫蘆街', '貴富街', '通河東街１段', '通河東街２段', '通河街', '通河西街１段', '通河西街２段', '重慶北路４段', '長春街', '陽明路１段', '陽明路２段', '雙溪街', '雨聲街', '雨農路'];
 var 北投區 = ['一德街', '一心路', '七星街', '三合街１段', '三合街２段', '中和街', '中和街新建巷', '中和街錫安巷', '中央北路１段', '中央北路２段', '中央北路３段', '中央北路４段', '中央南路１段', '中央南路２段', '中山北路７段', '中山路', '中心街', '中正街', '中興路', '中華街', '光明路', '光明路新生巷', '公舘路', '勝利街', '北投路１段', '北投路２段', '吉利街', '同德街', '大同街', '大屯路', '大屯路光華一巷', '大屯路光華三巷', '大屯路光華二巷', '大屯路光華四巷', '大度路', '大度路怡和巷', '大度路３段', '大業路', '大興街', '天母北路', '天母西路', '奇岩路', '奉賢路', '學園路', '宜山路', '富貴一路', '實踐街', '尊賢街', '崇仁路１段', '崇仰一路', '崇仰七路', '崇仰三路', '崇仰九路', '崇仰二路', '崇仰五路', '崇仰六路', '崗山路', '幽雅路', '幽雅路杏林巷', '建國街', '建民路', '復興一路', '復興三路', '復興二路', '復興四路', '懷德街', '承德路６段', '承德路７段', '振興街', '振華街', '文化三路', '文林北路', '新市街', '新民路', '新民路康樂巷', '新民路香丘巷', '新生街', '新興路', '明德路', '杏林一路', '杏林三路', '杏林二路', '東昇路', '東華街１段', '東華街２段', '東陽街', '榮華一路', '榮華三路', '榮華二路', '樹林路', '民族街', '民權街', '永興路１段', '永興路２段', '泉源路', '泉源路華南巷', '洲美街', '清江路', '湖山路１段', '湖山路２段', '湖底路', '溫泉路', '溫泉路天主巷', '溫泉路湯元巷', '溫泉路銀光巷', '珠海路', '登山路', '知行路', '石仙路', '石牌路１段', '石牌路２段', '磺港路', '福美路', '秀山路', '稻香路', '立功街', '立德路', '立賢路', '立農街１段', '立農街２段', '竹子湖路', '紗帽路', '義方街', '義理街', '翠宜路', '翠嶺路', '翠華街', '翠雲街', '聖景路', '育仁路', '自強街', '致遠一路１段', '致遠一路２段', '致遠三路', '致遠二路', '行義路', '裕民一路', '裕民三路', '裕民二路', '裕民六路', '裕民四路', '西園街', '西安街１段', '西安街２段', '豐年路１段', '豐年路２段', '進賢路', '重三路', '長壽路', '開明街', '關渡路', '陽明路１段', '陽明路２段', '雙全街'];
+
+function submitQuery(element) {
+    var target_form = $(`#${element.id}`).parent();
+    var query = decodeURI(target_form.serialize());
+    var url = "http://127.0.0.1/5000/"+query;
+    console.log(query);
+    console.log(query.search("default"));
+    if (query.search("default") != -1) {
+        return $(`#${element.id}`).parent().append("<h3 style='color: red;'>所有選項皆不能留空。</h3>")
+    }
+    else {
+        $(`#${element.id}`).parent().children().last().remove();
+        $.getJSON(url, () => {
+            console.log("Fetching data from local server");
+        }).done((data) => {
+            showResult(data); //pass data to function to extract and display information 
+        }).fail((msg) => {
+            console.log(msg);
+        }).always(() => {
+            console.log("Close connection with local server");
+        });
+    }
+}
+
+function showResult(data) {
+    var meal_amount;
+    var night_market_amount;
+    var carpark_amount;
+    var hospital_amount;
+    var police_station_amount;
+    var activity_center_amount;
+    var garbageCar_station_amount;
+    
+    try {
+        
+    }
+    catch(e) {}
+}

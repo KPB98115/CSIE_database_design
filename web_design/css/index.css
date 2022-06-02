@@ -3,7 +3,10 @@ body {
 }
 
 #menu {
+    display: grid;
+    grid-template-columns: 10% 80% 10%;
     text-align: center;
+    margin-top: 20px;
 }
 .menu_btn {
     font-size: medium;
