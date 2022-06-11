@@ -1,3 +1,5 @@
+
+
 function addForm() {
     var element_length = $("#form_gallery").children("div").length;
     var template = `<div class="queryForm" id="form${element_length+1}">
@@ -152,13 +154,45 @@ function submitQuery(element) {
 }
 
 function showResult(data) {
-    var meal_amount;
-    var night_market_amount;
-    var carpark_amount;
     var hospital_amount;
+    var clinic_amount;
+    
+    var pat_hospital_amount;
+    var cosmetic_amount;
+    var pet_grooming_amount;
+    var pet_resteruant_amount;
+    var pet_park_amount;
+
+    var metro_station_amount;
+    var train_station_amount;
+    var highSpeedRail_station_amount;
+    var youbike_station;
+    var carpark_amount;
+
+    var park_amount;
+    var sidewalk_tree_amount;
+
+    var resteruant_amount;
+    var night_market_amount;
+    var green_resteruant_amount;
+    var shopping_mall_amount;
+    
     var police_station_amount;
+    var crime_scene_location_amount;
+
+    var gymroom_amount;
+    var riverside_park_amount;
     var activity_center_amount;
+
+
     var garbageCar_station_amount;
+
+    var petFriendy_rate;
+    var sport_rate;
+    var entertainment_rate;
+    var food_rate;
+    var traffic_rate;
+    var grennENV_rate;
     
     try {
         
