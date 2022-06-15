@@ -23,43 +23,57 @@
             <div id="map">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d17195.415495820966!2d121.38879892154907!3d25.03779953574028!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a77b5cfba189%3A0x62bc289af4ecd083!2z6ZW35bqa5aSn5a24!5e0!3m2!1szh-TW!2stw!4v1653738720094!5m2!1szh-TW!2stw" width="800" height="800" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
-            <div id="info">
-                <h3 id="address"></h3>
-                <hr id="info_hr">
-                <div id="score">
-                    
+            <div>
+                <div class="category">
+                    <div id="category_entertainment">飲食與生活消費：</div>
+                    <p class="amount">餐廳：{{ resteruant_amount }}</p>
+                    <p class="amount">綠色餐廳：{{ green_resteruant_amount }}</p>
+                    <p class="amount">夜市：{{ night_market_amount }}</p>
+                    <p class="amount">超市：{{ supermarket_amount }}</p>
+                    <p class="amount">百貨公司：{{ shopping_mall_amount }}</p>
+                    <p class="amount">大賣場：{{ outlet_amount }}</p>
+                    <p class="amount">地下購物街：{{ underground_market_amount }}</p>
+                    <p class="amount">購物商圈：{{ business_district_amount }}</p>
                 </div>
-                <div id="meal" class="category">
-                    <h6 class="name"></h6>
-                    <p class="amount"></p>
+                <div class="category">
+                    <div id="category_traffic">交通工具：</div>
+                    <p class="amount">公車站：{{ bus_station_amount }}</p>
+                    <p class="amount">捷運站：{{ metro_station_amount }}</p>
+                    <p class="amount">Youbike站：{{ youbike_station_amount }}</p>
+                    <p class="amount">火車站：{{ train_station_amount }}</p>
+                    <p class="amount">高鐵站：{{ highSpeedRail_station_amount }}</p>
                 </div>
-                <div id="night_market" class="category">
-                    <h6 class="name"></h6>
-                    <p class="amount"></p>
+                <div class="category">
+                    <div id="category_medical">醫療設施：</div>
+                    <p class="amount">醫院：{{ hospital_amount }}</p>
+                    <p class="amount">診所：{{ clinic_amount }}</p>
                 </div>
-                <div id="carpark" class="category">
-                    <h6 class="name"></h6>
-                    <p class="amount"></p>
+                <div class="category">
+                    <div id="category_sport">運動場所：</div>
+                    <p class="amount">健身房：{{ gym_room_amount }}</p>
+                    <p class="amount">區民活動中心：{{ activity_center_amount }}</p>
+                    <p class="amount">河濱公園：{{ riverside_park_amount }}</p>
                 </div>
-                <div id="hospital" class="category">
-                    <h6 class="name"></h6>
-                    <p class="amount"></p>
+                <div class="category">
+                    <div id="category_enviorment">綠化及休憩環境：</div>
+                    <p class="amount">公園：{{ park_amount }}</p>
+                    <p class="amount">行道樹：{{ sidewalk_tree_amount }}</p>
                 </div>
-                <div id="police_station" class="category">
-                    <h6 class="name"></h6>
-                    <p class="amount"></p>
+            </div>
+            <div>
+                <div class="community_rate">社區評分</div>
+                <div id="rate">
+                    <div id="rate_resteruant">飲食：</div>
+                    <div id="rate_entertainment">生活消費：</div>
+                    <div id="rate_traffic">交通便利：</div>
+                    <div id="rate_public_security">治安(罪案數目)：</div>
+                    <div id="rate_pet_friendly">寵物友善：</div>
+                    <div id="rate_enviorment">綠化覆蓋：</div>
+                    <div id="rate_activity">運動場所：</div>
                 </div>
-                <div id="activity_center" class="category">
-                    <div id="gym_room"></div>
-                    <div id="river_park"></div>
-                    <div id="sport_center"></div>
-                </div>
-                <div id="garbageCar_station" class="category">
-                    <h6 class="name"></h6>
-                    <p class="amount"></p>
-                </div>
-                <div id="reservoir" class="category">
-                    <h6 class="name"></h6>
+                <div class="category">
+                    <div id="entertainment" class="category">
+                    <h2 class="name"></h2>
                     <p class="amount"></p>
                 </div>
             </div>

@@ -133,7 +133,7 @@ var 北投區 = ['一德街', '一心路', '七星街', '三合街１段', '三�
 function submitQuery(element) {
     var target_form = $(`#${element.id}`).parent();
     var query = decodeURI(target_form.serialize());
-    var url = "http://127.0.0.1/5000/"+query;
+    var url = "http://120.126.17.213:58095/query?"+query;
     console.log(query);
     console.log(query.search("default"));
     if (query.search("default") != -1) {
@@ -142,13 +142,13 @@ function submitQuery(element) {
     else {
         $(`#${element.id}`).parent().children().last().remove();
         $.getJSON(url, () => {
-            console.log("Fetching data from local server");
+            console.log("Fetching data from flask api server");
         }).done((data) => {
             showResult(data); //pass data to function to extract and display information 
         }).fail((msg) => {
             console.log(msg);
         }).always(() => {
-            console.log("Close connection with local server");
+            console.log("Close connection with flask api server");
         });
     }
 }
@@ -199,3 +199,41 @@ function showResult(data) {
     }
     catch(e) {}
 }
+
+/**
+ * <div class="category">
+                    <div id="rate_public_security">治安(罪案數目)：</div>
+                    <p class="amount">自行車竊盜：{{ bike_crime_amount }}</p>
+                    <p class="amount">機車竊盜：{{ motor_crime_amount }}</p>
+                    <p class="amount">汽車竊盜：{{ car_crime_amount }}</p>
+                    <p class="amount">住宅竊盜：{{ house_burglary_crime_amount }}</p>
+                    <p class="amount">隨機強盜：{{ robbery_crime_amount }}</p>
+                    <p class="amount">隨機搶奪：{{ burglary_amount }}</p>
+                </div>
+                <div class="category">
+                    <div id="rate_pet_friendly">寵物友善：</div>
+                    <p class="amount">寵物餐廳：{{ pet_resteruant_amount }}</p>
+                    <p class="amount">寵物美容：{{ pet_grooming_amount }}</p>
+                    <p class="amount">寵物公園：{{ pet_park_amount }}</p>
+                    <p class="amount">動物醫院：{{ pet_hospital_amount }}</p>
+                </div>
+                <div class="category">
+                    <div id="rate_entertainment">飲食與生活消費：</div>
+                    <p class="amount"></p>
+                </div>
+                <div class="category">
+                    <div id="entertainment" class="category">
+                    <h2 class="name"></h2>
+                    <p class="amount"></p>
+                </div>
+ */
+
+function getCoordinates(address){
+    fetch("https://maps.googleapis.com/maps/api/geocode/json?address="+address+'&key='+API_KEY)
+        .then(response => response.json())
+        .then(data => {
+        const latitude = data.results.geometry.location.lat;
+        const longitude = data.results.geometry.location.lng;
+        console.log({latitude, longitude})
+        })
+    }

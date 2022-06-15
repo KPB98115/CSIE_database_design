@@ -37,26 +37,18 @@ username = 'root'
 password = '12345678'
 database = 'test'
 
-table = "垃圾車停靠地點"
+table = "location"
 primary_key_atr = "truck_no"
 row_count = 10
 conn = _mysql.connect(host, username, password, database)
 
 
 #fetch data from databse
-#conn.query("""SELECT address, truck_no FROM `垃圾車停靠地點` """)
-#result = conn.store_result().fetch_row(row_count)
+conn.query(f"SELECT *, ST_distance_sphere( point(121.4989118, 25.0264558), point(`longitude`, `latitude`) )/1000 AS distance FROM `{table}` HAVING distance <= 3.00")
+result = conn.store_result().fetch_row(0, 1)
 
-#processing data
-"""
-for row in range(row_count):
-    coordinate = get_url_coordinate(result[row][0].decode("UTF-8"))
-    lat = coordinate[0]
-    log = coordinate[1]
-    print(str(lat)+" "+str(log))
-    pk = result[row][1].decode("UTF-8")
-    print("sql query : "+f"UPDATE `{table}` SET `longitude` = '{log}', `Latitude` = '{lat}' WHERE `{table}`.`{primary_key_atr}` = '{pk}'")
-    conn.query(f"UPDATE `{table}` SET `longitude` = '{log}', `Latitude` = '{lat}' WHERE `{table}`.`{primary_key_atr}` = '{pk}'")
+print(result[0])
 
-conn.close()
-"""
+sql_result_keys = [key for key in result[0]]
+
+print(sql_result_keys)
