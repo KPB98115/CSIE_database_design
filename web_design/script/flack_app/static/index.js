@@ -211,6 +211,20 @@ function submitQuery(element) {
     var url = "http://120.126.17.213:58095/query?"+query;
     var number_input_id = $(`#${element.id}`).parent().find(".input_no")[0].id;
     var number = parseInt($(`#${number_input_id}`).val());
+    var filter = "none";
+    try {
+        filter = $(`#${element.id}`).prev().find("select[name='filter_facility'] option:selected").val();
+    }catch(e) {console.log(e);}
+
+    var district_select_id = $(`#${element.id}`).parent().find(".form-select")[0].id;
+    var street_select_id = $(`#${element.id}`).parent().find(".form-select")[1].id;
+    var number_input_id = $(`#${element.id}`).parent().find(".input_no")[0].id;
+    
+    var district = $(`#${district_select_id}`).val();
+    var street = $(`#${street_select_id}`).val();
+    var number = $(`#${number_input_id}`).val();
+
+    const address = district+street+number+"號";
     
     console.log(query);
     if (query.search("default") != -1) {
@@ -227,7 +241,13 @@ function submitQuery(element) {
         $.getJSON(url, () => {
             console.log("data received.");
         }).done((data) => {
-            showResult(data, element);
+            if (filter == "none") {
+                showDetail(address, data, "none");
+            }
+            else {
+                showDetail(address, data, filter);
+            }
+            //showResult(data, element);
         }).fail((msg) => {
             $(`#${element.id}`).prop("value", "Submit");
             $(`#${element.id}`).prop("disabled", false);
@@ -247,6 +267,7 @@ async function getAllData(url, element) {
             return res.json();
         });
         showResult(data, element);
+        showDetail("none", data, "none");
     }
     catch(e) {
         console.log(e);
@@ -277,7 +298,6 @@ function showResult(data, element) {
         train: data[1].train.length,
         high_speed_rail: data[1].high_speed_rail.length,
         YouBike: data[1].YouBike.length,
-
     }
 
     activity = {
@@ -434,8 +454,15 @@ function communityRate(entertain, catering, traffic, activity, enviorment, medic
     }
 }
 
-function showDetail(address, data) {
+function showDetail(address, data, additional) {
+    var location;
 
+    if (address != "none") {
+        location = address;
+    }
+
+    
+    
     var entertainment = [[],[],[],[]];
     var traffic = [[],[],[],[],[]];
     var catering = [[],[]];
@@ -445,186 +472,374 @@ function showDetail(address, data) {
     var pet_friendly = [[],[],[],[]];
     var security = [[],[],[],[],[],[]];
     var garbageCar = [];
+    
+    if (additional != "none") {
 
-    //for (var i=0; i < data[0].shopping_mall.length; i++) {
-    //    entertainment.push(data[0].shopping_mall[i]);
-    //}
-
-    //console.log(entertainment);
-
-    for (var key in data[0]) {
-        if (key == "shopping_mall") {
-            for (var j=0; j < data[0][key].length; j++) {
-                entertainment[0].push(data[0].shopping_mall[j]);
+        if (additional == "消費與娛樂") {
+            for (var key in data[0]) {
+                if (key == "shopping_mall") {
+                    for (var j=0; j < data[0][key].length; j++) {
+                        entertainment[0].push(data[0].shopping_mall[j]);
+                    }
+                }
+                else if (key == "business_district") {
+                    for (var j=0; j < data[0][key].length; j++) {
+                        entertainment[1].push(data[0].business_district[j]);
+                    }
+                }
+                else if (key == "outlet") {
+                    for (var j=0; j < data[0][key].length; j++) {
+                        entertainment[2].push(data[0].outlet[j]);
+                    }
+                }
+                else if (key == "underground_market") {
+                    for (var j=0; j < data[0][key].length; j++) {
+                        entertainment[3].push(data[0].underground_market[j]);
+                    }
+                }
             }
         }
-        else if (key == "business_district") {
-            for (var j=0; j < data[0][key].length; j++) {
-                entertainment[1].push(data[0].business_district[j]);
+        else if (additional == "交通") {
+            for (var key in data[1]) {
+                if (key == "bus_stop") {
+                    for (var j=0; j < data[1][key].length; j++) {
+                        traffic[0].push(data[1].bus_stop[j]);
+                    }
+                }
+                else if (key == "metro") {
+                    for (var j=0; j < data[1][key].length; j++) {
+                        traffic[1].push(data[1].metro[j]);
+                    }
+                }
+                else if (key == "train") {
+                    for (var j=0; j < data[1][key].length; j++) {
+                        traffic[2].push(data[1].train[j]);
+                    }
+                }
+                else if (key == "high_speed_rail") {
+                    for (var j=0; j < data[1][key].length; j++) {
+                        traffic[3].push(data[1].high_speed_rail[j]);
+                    }
+                }
+                else if (key == "YouBike") {
+                    for (var j=0; j < data[1][key].length; j++) {
+                        traffic[4].push(data[1].YouBike[j]);
+                    }
+                }
             }
         }
-        else if (key == "outlet") {
-            for (var j=0; j < data[0][key].length; j++) {
-                entertainment[2].push(data[0].outlet[j]);
+        else if (additional == "運動場所") {
+            for (var key in data[2]) {
+                if (key == "activity_center") {
+                    for (var j=0; j < data[2][key].length; j++) {
+                        activity[0].push(data[2].activity_center[j]);
+                    }
+                }
+                else if (key == "gymroom") {
+                    for (var j=0; j < data[2][key].length; j++) {
+                        activity[1].push(data[2].gymroom[j]);
+                    }
+                }
+                else if (key == "riverside_park") {
+                    for (var j=0; j < data[2][key].length; j++) {
+                        activity[2].push(data[2].riverside_park[j]);
+                    }
+                }
             }
         }
-        else if (key == "underground_market") {
-            for (var j=0; j < data[0][key].length; j++) {
-                entertainment[3].push(data[0].underground_market[j]);
+        else if (additional == "醫療場所") {
+            for (var key in data[4]) {
+                if (key == "hosptial") {
+                    for (var j=0; j < data[4][key].length; j++) {
+                        medical[0].push(data[4].hosptial[j]);
+                    }
+                }
+                else if (key == "ALLclinic") {
+                    for (var j=0; j < data[4][key].length; j++) {
+                        medical[1].push(data[4].ALLclinic[j]);
+                    }
+                }
+            }
+        }
+        else if (additional == "餐飲") {
+            for (var key in data[3]) {
+                if (key == "green_resteruant") {
+                    for (var j=0; j < data[3][key].length; j++) {
+                        catering[0].push(data[3].green_resteruant[j]);
+                    }
+                }
+                else if (key == "night_market") {
+                    for (var j=0; j < data[3][key].length; j++) {
+                        catering[1].push(data[3].night_market[j]);
+                    }
+                }
+            }
+        }
+        else if (additional == "寵物友善") {
+            for (var key in data[5]) {
+                if (key == "pet_clinic") {
+                    for (var j=0; j < data[5][key].length; j++) {
+                        pet_friendly[0].push(data[5].pet_clinic[j]);
+                    }
+                }
+                else if (key == "pet_park") {
+                    for (var j=0; j < data[5][key].length; j++) {
+                        pet_friendly[1].push(data[5].pet_park[j]);
+                    }
+                }
+                else if (key == "pet_resteruant") {
+                    for (var j=0; j < data[5][key].length; j++) {
+                        pet_friendly[2].push(data[5].pet_resteruant[j]);
+                    }
+                }
+                else if (key == "pet_hospital") {
+                    for (var j=0; j < data[5][key].length; j++) {
+                        pet_friendly[3].push(data[5].pet_hospital[j]);
+                    }
+                }
+            }
+        }
+        else if (additional =="綠色環境") {
+            for (var key in data[6]) {
+                if (key == "park") {
+                    for (var j=0; j < data[6][key].length; j++) {
+                        enviorment[0].push(data[6].park[j]);
+                    }
+                }
+                else if (key == "sidewalk_tree") {
+                    for (var j=0; j < data[6][key].length; j++) {
+                        enviorment[1].push(data[6].sidewalk_tree[j]);
+                    }
+                }
+            }
+        }
+        else if (additional == "治安") {
+            for (var key in data[7]) {
+                if (key == "bike") {
+                    for (var j=0; j < data[7][key].length; j++) {
+                        security[0].push(data[7].bike[j]);
+                    }
+                }
+                else if (key == "motor") {
+                    for (var j=0; j < data[7][key].length; j++) {
+                        security[1].push(data[7].motor[j]);
+                    }
+                }
+                else if (key == "car") {
+                    for (var j=0; j < data[7][key].length; j++) {
+                        security[2].push(data[7].car[j]);
+                    }
+                }
+                else if (key == "house") {
+                    for (var j=0; j < data[7][key].length; j++) {
+                        security[3].push(data[7].house_burglary[j]);
+                    }
+                }
+                else if (key == "robbery") {
+                    for (var j=0; j < data[7][key].length; j++) {
+                        security[4].push(data[7].robbery[j]);
+                    }
+                }
+                else if (key == "burglary") {
+                    for (var j=0; j < data[7][key].length; j++) {
+                        security[5].push(data[7].burglary[j]);
+                    }
+                }
+            }
+        }
+        else if (additional == "垃圾車站點") {
+            for (var key in data[7]) {
+                if (key == "garbage_car") {
+                    for (var j=0; j < data[8][key].length; j++) {
+                        garbageCar[0].push(data[8].garbage_car[j]);
+                    }
+                }
+            }
+        }
+    }
+    else {
+        
+        //for (var i=0; i < data[0].shopping_mall.length; i++) {
+        //    entertainment.push(data[0].shopping_mall[i]);
+        //}
+    
+        //console.log(entertainment);
+    
+        for (var key in data[0]) {
+            if (key == "shopping_mall") {
+                for (var j=0; j < data[0][key].length; j++) {
+                    entertainment[0].push(data[0].shopping_mall[j]);
+                }
+            }
+            else if (key == "business_district") {
+                for (var j=0; j < data[0][key].length; j++) {
+                    entertainment[1].push(data[0].business_district[j]);
+                }
+            }
+            else if (key == "outlet") {
+                for (var j=0; j < data[0][key].length; j++) {
+                    entertainment[2].push(data[0].outlet[j]);
+                }
+            }
+            else if (key == "underground_market") {
+                for (var j=0; j < data[0][key].length; j++) {
+                    entertainment[3].push(data[0].underground_market[j]);
+                }
+            }
+        }
+    
+        for (var key in data[1]) {
+            if (key == "bus_stop") {
+                for (var j=0; j < data[1][key].length; j++) {
+                    traffic[0].push(data[1].bus_stop[j]);
+                }
+            }
+            else if (key == "metro") {
+                for (var j=0; j < data[1][key].length; j++) {
+                    traffic[1].push(data[1].metro[j]);
+                }
+            }
+            else if (key == "train") {
+                for (var j=0; j < data[1][key].length; j++) {
+                    traffic[2].push(data[1].train[j]);
+                }
+            }
+            else if (key == "high_speed_rail") {
+                for (var j=0; j < data[1][key].length; j++) {
+                    traffic[3].push(data[1].high_speed_rail[j]);
+                }
+            }
+            else if (key == "YouBike") {
+                for (var j=0; j < data[1][key].length; j++) {
+                    traffic[4].push(data[1].YouBike[j]);
+                }
+            }
+        }
+    
+        for (var key in data[2]) {
+            if (key == "activity_center") {
+                for (var j=0; j < data[2][key].length; j++) {
+                    activity[0].push(data[2].activity_center[j]);
+                }
+            }
+            else if (key == "gymroom") {
+                for (var j=0; j < data[2][key].length; j++) {
+                    activity[1].push(data[2].gymroom[j]);
+                }
+            }
+            else if (key == "riverside_park") {
+                for (var j=0; j < data[2][key].length; j++) {
+                    activity[2].push(data[2].riverside_park[j]);
+                }
+            }
+        }
+    
+        for (var key in data[3]) {
+            if (key == "green_resteruant") {
+                for (var j=0; j < data[3][key].length; j++) {
+                    catering[0].push(data[3].green_resteruant[j]);
+                }
+            }
+            else if (key == "night_market") {
+                for (var j=0; j < data[3][key].length; j++) {
+                    catering[1].push(data[3].night_market[j]);
+                }
+            }
+        }
+    
+        for (var key in data[4]) {
+            if (key == "hosptial") {
+                for (var j=0; j < data[4][key].length; j++) {
+                    medical[0].push(data[4].hosptial[j]);
+                }
+            }
+            else if (key == "ALLclinic") {
+                for (var j=0; j < data[4][key].length; j++) {
+                    medical[1].push(data[4].ALLclinic[j]);
+                }
+            }
+        }
+    
+        for (var key in data[5]) {
+            if (key == "pet_clinic") {
+                for (var j=0; j < data[5][key].length; j++) {
+                    pet_friendly[0].push(data[5].pet_clinic[j]);
+                }
+            }
+            else if (key == "pet_park") {
+                for (var j=0; j < data[5][key].length; j++) {
+                    pet_friendly[1].push(data[5].pet_park[j]);
+                }
+            }
+            else if (key == "pet_resteruant") {
+                for (var j=0; j < data[5][key].length; j++) {
+                    pet_friendly[2].push(data[5].pet_resteruant[j]);
+                }
+            }
+            else if (key == "pet_hospital") {
+                for (var j=0; j < data[5][key].length; j++) {
+                    pet_friendly[3].push(data[5].pet_hospital[j]);
+                }
+            }
+        }
+    
+        for (var key in data[6]) {
+            if (key == "park") {
+                for (var j=0; j < data[6][key].length; j++) {
+                    enviorment[0].push(data[6].park[j]);
+                }
+            }
+            else if (key == "sidewalk_tree") {
+                for (var j=0; j < data[6][key].length; j++) {
+                    enviorment[1].push(data[6].sidewalk_tree[j]);
+                }
+            }
+        }
+    
+        for (var key in data[7]) {
+            if (key == "bike") {
+                for (var j=0; j < data[7][key].length; j++) {
+                    security[0].push(data[7].bike[j]);
+                }
+            }
+            else if (key == "motor") {
+                for (var j=0; j < data[7][key].length; j++) {
+                    security[1].push(data[7].motor[j]);
+                }
+            }
+            else if (key == "car") {
+                for (var j=0; j < data[7][key].length; j++) {
+                    security[2].push(data[7].car[j]);
+                }
+            }
+            else if (key == "house") {
+                for (var j=0; j < data[7][key].length; j++) {
+                    security[3].push(data[7].house_burglary[j]);
+                }
+            }
+            else if (key == "robbery") {
+                for (var j=0; j < data[7][key].length; j++) {
+                    security[4].push(data[7].robbery[j]);
+                }
+            }
+            else if (key == "burglary") {
+                for (var j=0; j < data[7][key].length; j++) {
+                    security[5].push(data[7].burglary[j]);
+                }
+            }
+        }
+    
+        for (var key in data[7]) {
+            if (key == "garbage_car") {
+                for (var j=0; j < data[8][key].length; j++) {
+                    garbageCar[0].push(data[8].garbage_car[j]);
+                }
             }
         }
     }
 
-    for (var key in data[1]) {
-        if (key == "bus_stop") {
-            for (var j=0; j < data[1][key].length; j++) {
-                traffic[0].push(data[1].bus_stop[j]);
-            }
-        }
-        else if (key == "metro") {
-            for (var j=0; j < data[1][key].length; j++) {
-                traffic[1].push(data[1].metro[j]);
-            }
-        }
-        else if (key == "train") {
-            for (var j=0; j < data[1][key].length; j++) {
-                traffic[2].push(data[1].train[j]);
-            }
-        }
-        else if (key == "high_speed_rail") {
-            for (var j=0; j < data[1][key].length; j++) {
-                traffic[3].push(data[1].high_speed_rail[j]);
-            }
-        }
-        else if (key == "YouBike") {
-            for (var j=0; j < data[1][key].length; j++) {
-                traffic[4].push(data[1].YouBike[j]);
-            }
-        }
-    }
 
-    for (var key in data[2]) {
-        if (key == "activity_center") {
-            for (var j=0; j < data[2][key].length; j++) {
-                activity[0].push(data[2].activity_center[j]);
-            }
-        }
-        else if (key == "gymroom") {
-            for (var j=0; j < data[2][key].length; j++) {
-                activity[1].push(data[2].gymroom[j]);
-            }
-        }
-        else if (key == "riverside_park") {
-            for (var j=0; j < data[2][key].length; j++) {
-                activity[2].push(data[2].riverside_park[j]);
-            }
-        }
-    }
-
-    for (var key in data[3]) {
-        if (key == "green_resteruant") {
-            for (var j=0; j < data[3][key].length; j++) {
-                catering[0].push(data[3].green_resteruant[j]);
-            }
-        }
-        else if (key == "night_market") {
-            for (var j=0; j < data[3][key].length; j++) {
-                catering[1].push(data[3].night_market[j]);
-            }
-        }
-    }
-
-    for (var key in data[4]) {
-        if (key == "hosptial") {
-            for (var j=0; j < data[4][key].length; j++) {
-                medical[0].push(data[4].hosptial[j]);
-            }
-        }
-        else if (key == "ALLclinic") {
-            for (var j=0; j < data[4][key].length; j++) {
-                medical[1].push(data[4].ALLclinic[j]);
-            }
-        }
-    }
-
-    for (var key in data[5]) {
-        if (key == "pet_clinic") {
-            for (var j=0; j < data[5][key].length; j++) {
-                pet_friendly[0].push(data[5].pet_clinic[j]);
-            }
-        }
-        else if (key == "pet_park") {
-            for (var j=0; j < data[5][key].length; j++) {
-                pet_friendly[1].push(data[5].pet_park[j]);
-            }
-        }
-        else if (key == "pet_resteruant") {
-            for (var j=0; j < data[5][key].length; j++) {
-                pet_friendly[2].push(data[5].pet_resteruant[j]);
-            }
-        }
-        else if (key == "pet_hospital") {
-            for (var j=0; j < data[5][key].length; j++) {
-                pet_friendly[3].push(data[5].pet_hospital[j]);
-            }
-        }
-    }
-
-    for (var key in data[6]) {
-        if (key == "park") {
-            for (var j=0; j < data[6][key].length; j++) {
-                enviorment[0].push(data[6].park[j]);
-            }
-        }
-        else if (key == "sidewalk_tree") {
-            for (var j=0; j < data[6][key].length; j++) {
-                enviorment[1].push(data[6].sidewalk_tree[j]);
-            }
-        }
-    }
-
-    for (var key in data[7]) {
-        if (key == "bike") {
-            for (var j=0; j < data[7][key].length; j++) {
-                security[0].push(data[7].bike[j]);
-            }
-        }
-        else if (key == "motor") {
-            for (var j=0; j < data[7][key].length; j++) {
-                security[1].push(data[7].motor[j]);
-            }
-        }
-        else if (key == "car") {
-            for (var j=0; j < data[7][key].length; j++) {
-                security[2].push(data[7].car[j]);
-            }
-        }
-        else if (key == "house") {
-            for (var j=0; j < data[7][key].length; j++) {
-                security[3].push(data[7].house_burglary[j]);
-            }
-        }
-        else if (key == "robbery") {
-            for (var j=0; j < data[7][key].length; j++) {
-                security[4].push(data[7].robbery[j]);
-            }
-        }
-        else if (key == "burglary") {
-            for (var j=0; j < data[7][key].length; j++) {
-                security[5].push(data[7].burglary[j]);
-            }
-        }
-    }
-
-    for (var key in data[7]) {
-        if (key == "garbage_car") {
-            for (var j=0; j < data[8][key].length; j++) {
-                garbageCar[0].push(data[8].garbage_car[j]);
-            }
-        }
-    }
-
-    const template = `<h3>${address}</h3>
+    const template = `<h3>${location}</h3>
     <div class="details">
         <div class="category" id="catering">
             <div id="green_resteruant">
