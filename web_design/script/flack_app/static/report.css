@@ -1,0 +1,31 @@
+.container {
+    text-align: center;
+}
+
+.question {
+    display: inline;
+}
+
+#title {
+    font-size: x-large;
+    margin-bottom: 20px;
+}
+
+#comment_area {
+    width: 30%;
+    margin-bottom: 10px;
+}
+
+#remark {
+    width: 30%;
+}
+
+#menu {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+#submit_btn {
+    margin-top: 10px;
+}

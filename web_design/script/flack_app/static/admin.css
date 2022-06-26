@@ -1,0 +1,60 @@
+#menu {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 20px;
+}
+.menu_btn {
+    font-size: medium;
+    width: 100px;
+    height: 50px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border: none;
+    background: none;
+}
+#menu_hr {
+    color: gray;
+    width: 100%;
+}
+
+.result {
+    display: grid;
+    grid-template-columns: auto 10%;
+}
+
+table {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+th, td {
+    padding: 2px;
+    border: solid 1px;
+}
+
+#netvigator {
+    text-align: center;
+    writing-mode: vertical-rl;
+    color: rgb(89, 190, 230);
+}
+
+.details {
+    padding: 10px;
+}
+
+table {
+    width: 100%;
+}
+
+.category {
+    padding: 10px;
+    background-color: white;
+}
+
+.category>div {
+    margin-bottom: 20px;
+}

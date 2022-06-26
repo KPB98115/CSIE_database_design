@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result Page template</title>
+    <link rel="stylesheet" href="../static/result.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="../static/result.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div id="header">
+            <div id="menu">
+                <img class="logo_img" src="/static/logo.png"/>
+                <div><button class="btn btn-outline-success" id="homePage" onclick="redirect(this)">Home page</button></div>
+                <div><button class="btn btn-outline-success" id="report" onclick="redirect(this)">Report</button></div>
+            </div>
+            <hr id="menu_hr">
+        </div>
+        <div class="query_result" id="result">
+            <button onclick="getfile()">GET</button>
+            <div>
+                <div class="category" id="catering">
+                    <div id="green_resteruant">
+                        <table>
+                            <thead>
+                                <h5>綠色餐廳</h5>
+                                <tr>
+                                    <th>地區</th>
+                                    <th>名稱</th>
+                                    <th>地址</th>
+                                    <th>備註</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="night_market">
+                        <table>
+                            <thead>
+                                <h5>夜市</h5>
+                                <tr>
+                                    <th>地區</th>
+                                    <th>名稱</th>
+                                    <th>地址</th>
+                                    <th>備註</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="category" id="entertainment">
+                    <div id="shopping_mall">
+                        <table>
+                            <thead>
+                                <h5>百貨公司</h5>
+                                <tr>
+                                    <th>地區</th>
+                                    <th>名稱</th>
+                                    <th>地址</th>
+                                    <th>備註</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="business_district">
+                        <table>
+                            <thead>
+                                <h5>購物商圈</h5>
+                                <tr>
+                                    <th>地區</th>
+                                    <th>名稱</th>
+                                    <th>地址</th>
+                                    <th>備註</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="market">
+                        <table>
+                            <thead>
+                                <h5>大賣場</h5>
+                                <tr>
+                                    <th>地區</th>
+                                    <th>名稱</th>
+                                    <th>地址</th>
+                                    <th>備註</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="underground_market">
+                        <table>
+                            <thead>
+                                <h5>地下購物街</h5>
+                                <tr>
+                                    <th>地區</th>
+                                    <th>名稱</th>
+                                    <th>地址</th>
+                                    <th>備註</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="category" id="traffic">
+                    <div id="busstop">
+                        <table>
+                            <thead>
+                                <h5>公車站</h5>
+                                <tr>
+                                    <th>地區</th>
+                                    <th>名稱</th>
+                                    <th>地址</th>
+                                    <th>備註</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="metro">
+                        <table>
+                            <thead>
+                                <h5>捷運站</h5>
+                                <tr>
+                                    <th>地區</th>
+                                    <th>名稱</th>
+                                    <th>地址</th>
+                                    <th>備註</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="youbike">
+                        <table>
+                            <thead>
+                                <h5>YouBike站</h5>
+                                <tr>
+                                    <th>地區</th>
+                                    <th>名稱</th>
+                                    <th>地址</th>
+                                    <th>備註</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="train">
+                        <table>
+                            <thead>
+                                <h5>火車站</h5>
+                                <tr>
+                                    <th>地區</th>
+                                    <th>名稱</th>
+                                    <th>地址</th>
+                                    <th>備註</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="highspreedrail">
+                        <table>
+                            <thead>
+                                <h5>高鐵站</h5>
+                                <tr>
+                                    <th>地區</th>
+                                    <th>名稱</th>
+                                    <th>地址</th>
+                                    <th>備註</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="category" id="medical">
+                    <div id="hospital">
+                        <table>
+                            <thead>
+                                <h5>醫院</h5>
+                                <tr>
+                                    <th>地區</th>
+                                    <th>名稱</th>
+                                    <th>地址</th>
+                                    <th>備註</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="clinic">
+                        <table>
+                            <thead>
+                                <h5>診所</h5>
+                                <tr>
+                                    <th>地區</th>
+                                    <th>名稱</th>
+                                    <th>地址</th>
+                                    <th>備註</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="category" id="activity">
+                    <div id="gymroom">
+                        <table>
+                            <thead>
+                                <h5>健身房</h5>
+                                <tr>
+                                    <th>地區</th>
+                                    <th>名稱</th>
+                                    <th>地址</th>
+                                    <th>備註</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="activity_center">
+                        <table>
+                            <thead>
+                                <h5>區民活動中心</h5>
+                                <tr>
+                                    <th>地區</th>
+                                    <th>名稱</th>
+                                    <th>地址</th>
+                                    <th>備註</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="riverside_park">
+                        <table>
+                            <thead>
+                                <h5>河濱公園</h5>
+                                <tr>
+                                    <th>地區</th>
+                                    <th>名稱</th>
+                                    <th>地址</th>
+                                    <th>備註</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="category" id="enviorment">
+                    <div id="">
+                        <table>
+                            <thead>
+                                <h5>公園</h5>
+                                <tr>
+                                    <th>地區</th>
+                                    <th>名稱</th>
+                                    <th>地址</th>
+                                    <th>備註</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="">
+                        <table>
+                            <thead>
+                                <h5>行道樹</h5>
+                                <tr>
+                                    <th>地區</th>
+                                    <th>名稱</th>
+                                    <th>地址</th>
+                                    <th>備註</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="category" id="pet">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>地區</th>
+                                <th>名稱</th>
+                                <th>地址</th>
+                                <th>備註</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="category" id="crime">
+                    <div id="case">
+                        <table>
+                            <thead>
+                                <h5>搶劫案件</h5>
+                                <tr>
+                                    <th>地區</th>
+                                    <th>名稱</th>
+                                    <th>地址</th>
+                                    <th>備註</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="category" id="garbage">
+                    <div id="garbage_route">
+                        <table>
+                            <thead>
+                                <h5>垃圾車站點</h5>
+                                <tr>
+                                    <th>地區</th>
+                                    <th>名稱</th>
+                                    <th>地址</th>
+                                    <th>備註</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="community_rate">社區評分</div>
+                <div id="rate">
+                    <div id="rate_resteruant">飲食：</div>
+                    <div id="rate_entertainment">生活消費：</div>
+                    <div id="rate_traffic">交通便利：</div>
+                    <div id="rate_public_security">治安(罪案數目)：</div>
+                    <div id="rate_pet_friendly">寵物友善：</div>
+                    <div id="rate_enviorment">綠化覆蓋：</div>
+                    <div id="rate_activity">運動場所：</div>
+                </div>
+                <div class="category">
+                    <div id="entertainment" class="category">
+                    <h2 class="name"></h2>
+                    <p class="amount"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

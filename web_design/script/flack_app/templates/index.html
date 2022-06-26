@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Front Page template</title>
+    <link rel="stylesheet" href="../static/index.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="../static/index.js"></script>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBglsbKI_-4idv_WoI0DPXN20TnyHHCL-s">
+    </script>
+</head>
+<body>
+<div class="background">
+    <div class="container">
+        <div id="header">
+            <div id="menu">
+                <img class="logo_img" src="/static/logo.png"/>
+                <div><button class="btn btn-outline-success" id="homePage" onclick="redirect(this)">Home page</button></div>
+                <div><button class="btn btn-outline-success" id="report" onclick="redirect(this)">Report</button></div>
+            </div>
+            <hr id="menu_hr">
+        </div>
+        <div id="gallery">
+            <div id="form_gallery">
+                <div class="queryForm" id="form1">
+                    <div><button id="cancel_btn1" class="cancelForm_btn" onclick="removeForm(this)"></button></div>
+                    <div id="temp_form">
+                        <form class="formstyle" action="" method="post">
+                            <label for="address" class="form-label">目標地址：</label>
+                            <select name="district" style="display: inline-flex; width: 80%;" class="form-select" id="district1" onchange="checkDistrict(this)">
+                                <option value="default" selected>請選擇區域</option>
+                            </select>
+                            <select name="street" style="display: inline-flex; width: 80%;" class="form-select" id="street1">
+                                <option value="default" selected>請選擇街道</option>
+                            </select>
+                            <input name="number" type="text" class="input_no" id="street_no_1" placeholder="請輸入街號..."><span style="background: white;">號</span>
+                            <input type="checkbox" name="additional_village" onchange="checkAdditional(this)" id="additional_1"><span>新增里別</span>
+                            <label for="range" class="form-label">搜尋範圍：</label>
+                            <select name="range" style="display: inline-flex; width: 80%;" class="form-select" id="range1">
+                                <option value="default" selected>請選擇距離</option>
+                                <option value="0.5">500米</option>
+                                <option value="1">1公里</option>
+                                <option value="1.5">1.5公里</option>
+                                <option value="2">2公里</option>
+                                <option value="2.5">2.5公里</option>
+                                <option value="3">3公里</option>
+                            </select>
+                            <div class="form_filter">
+                                <h5 style="display: inline;">篩選器</h5>
+                                <select name="type_filter" class="form-select" onChange="checkFilter(this)" id="type_filter_1">
+                                    <option value="default">請選擇篩選類型：</option>
+                                    <option value="district">以地區篩選</option>
+                                    <option value="facility">以設施篩選</option>
+                                </select>
+                            </div>
+                            <input id="submit_btn1" class="btn btn-primary" type="button" value="submit" style="margin-top: 50px;" onclick="submitQuery(this)">
+                        </form>
+                    </div>
+                </div>
+                <button class="btn btn-outline-secondary" id="addForm" onclick="addForm()">新增比較</button>
+            </div>
+        </div>
+        <div id="result_section" hidden>
+            <h3 style="display: inline;">篩選器</h3>
+            <input type="checkbox" onchange="selectAll(this)" id="filter_selectAll">全選</input>
+            <input type="checkbox" name="entertainment" onchange="result_filter(this)" class="filter_btn" id="filter_entertain">消費與娛樂</input>
+            <input type="checkbox" name="catering" onchange="result_filter(this)" class="filter_btn" id="filter_catering">餐廳</input>
+            <input type="checkbox" name="traffic" onchange="result_filter(this)" class="filter_btn" id="fileter_traffic">交通</input>
+            <input type="checkbox" name="activity" onchange="result_filter(this)" class="filter_btn" id="filter_activity">運動</input>
+            <input type="checkbox" name="medical" onchange="result_filter(this)" class="filter_btn" id="filter_medical">醫療場所</input>
+            <input type="checkbox" name="enviorment" onchange="result_filter(this)" class="filter_btn" id="filter_enviorment">綠化</input>
+            <input type="checkbox" name="secuity" onchange="result_filter(this)" class="filter_btn" id="filter_secuity">治安</input>
+            <input type="checkbox" name="pet_friendly" onchange="result_filter(this)" class="filter_btn" id="filter_pet_friendly">寵物友善</input>
+            <input type="checkbox" name="garbageCar" onchange="result_filter(this)" class="filter_btn">垃圾車站點</input>
+        </div>
+    </div>
+</div>
+</body>
+</html>

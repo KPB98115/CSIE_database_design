@@ -1,0 +1,41 @@
+#menu {
+    display: grid;
+    grid-template-columns: 30% auto 50%;
+}
+
+#menu_hr {
+    color: gray;
+    width: 100%;
+}
+
+.logo_img {
+    object-fit: contain;
+    width:150px;
+    height:150px;
+}
+
+.query_result {
+    display: grid;
+}
+
+.amount_title {
+    font-size: small;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: solid 1px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: rgba(252, 203, 71, 0.74);
+}
+
+.community_rate {
+    font-size: small;
+    display: grid;
+    grid-template-columns: 21% auto;
+}
+
+.test {
+    background-color: white;
+    width: 320px;
+    height: 800px;
+}
