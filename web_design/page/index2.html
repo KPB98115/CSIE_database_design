@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Front Page template</title>
+    <link rel="stylesheet" href="../static/index.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="../static/index.js"></script>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBglsbKI_-4idv_WoI0DPXN20TnyHHCL-s">
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div id="header">
+            <div id="menu">
+                <div><button class="btn btn-outline-success" id="homePage" onclick="redirect(this)">Home page</button></div>
+                <div><button class="btn btn-outline-success" id="report" onclick="redirect(this)">Report</button></div>
+            </div>
+            <hr id="menu_hr">
+        </div>
+        <div id="gallery">
+            <div id="form_gallery">
+                <div class="queryForm" id="form1">
+                    <div><button id="cancel_btn1" class="cancelForm_btn" onclick="removeForm(this)"></button></div>
+                    <div id="temp_form">
+                        <div>
+                            <div>地址：${address}</div>
+                            <div class="amount_title">
+                                <p class="amount_entertain">百貨公司：${entertainment.shopping_mall}</p>
+                                <p class="amount_entertain">商圈：${entertainment.business_district}</p>
+                                <p class="amount_entertain">大賣場：${entertainment.outlet}</p>
+                                <p class="amount_entertain">地下商店街：${entertainment.underground_market}</p>
+                            </div>
+                            <div class="amount_title">
+                                <p class="amount_traffic">公車站：${traffic.bus_stop}</p>
+                                <p class="amount_traffic">捷運站：${traffic.metro}</p>
+                                <p class="amount_traffic">YouBike站：${traffic.YouBike}</p>
+                                <p class="amount_traffic">火車站：${traffic.train}</p>
+                                <p class="amount_traffic">高鐵站：${traffic.high_speed_rail}</p>
+                            </div>
+                            <div class="amount_title">
+                                <p class="amount_activity">區民運動中心：${activity.activity_center}</p>
+                                <p class="amount_activity">健身房：${activity.gymroom}</p>
+                                <p class="amount_activity">河濱公園：${activity.riverside_park}</p>
+                            </div>
+                            <div class="amount_title">
+                                <p class="amount_meal">綠色餐廳：${catering.green_resteruant}</p>
+                                <p class="amount_meal">夜市：${catering.night_market}</p>
+                            </div>
+                            <div class="amount_title">
+                                <p class="amount_medical">醫院：${medical.hospital}</p>
+                                <p class="amount_medical">診所：${medical.clinic}</p>
+                            </div>
+                            <div class="amount_title">
+                                <p class="amount_enviorment">公園：${enviorment.park}</p>
+                                <p class="amount_enviorment">行道樹：${enviorment.sidewalk_tree}</p>
+                            </div>
+                            <div class="amount_title">
+                                <p class="amount_petFriendly">寵物診所：${pet_friendly.pet_clinic}</p>
+                                <p class="amount_petFriendly">寵物公園：${pet_friendly.pet_park}</p>
+                                <p class="amount_petFriendly">寵物餐廳：${pet_friendly.pet_resteruant}</p>
+                            </div>
+                            <div class="amount_title">
+                                <p class="amount_public_facility">垃圾車站點：${garbage.garbageCar_station}</p>
+                            </div>
+                            <div>社區評分：</div>
+                            <div class="community_rate">
+                                <div>娛樂：</div><div class="progress-bar" role="progressbar" style="width: ${rate.entertain}%; background-color: pink;"></div><div>${Math.round(rate.entertain*100)/100}%</div>
+                                <div>食：</div><div class="progress-bar" role="progressbar" style="width: ${rate.catering}%; background-color: orange;"></div><div>${Math.round(rate.catering*100)/100}%</div>
+                                <div>交通：</div><div class="progress-bar" role="progressbar" style="width: ${rate.traffic}%; background-color: yellow;"></div><div>${Math.round(rate.traffic*100)/100}%</div>
+                                <div>綠化：</div><div class="progress-bar" role="progressbar" style="width: ${rate.enviorment}%; background-color: limegreen;"></div><div>${Math.round(rate.enviorment*100)/100}%</div>
+                                <div>治安：</div><div class="progress-bar" role="progressbar" style="width: ${rate.security}%; background-color: lightblue;"></div><div>${Math.round(rate.security*100)/100}%</div>
+                                <div>寵物友善：</div><div class="progress-bar" role="progressbar" style="width: ${rate.pet_friendly}%; background-color: burlywood;"></div><div>${Math.round(rate.pet_friendly*100)/100}%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-outline-secondary" id="addForm" onclick="addForm()">新增比較</button>
+            </div>
+        </div>
+        <div id="result_section"></div>
+    </div>
+</body>
+</html>

@@ -1,12 +1,8 @@
-body {
-    background-color: lightgray;
-}
-
 #menu {
-    display: grid;
-    grid-template-columns: 10% 80% 10%;
-    text-align: center;
+    display: flex;
+    justify-content: center;
     margin-top: 20px;
+    gap: 20px;
 }
 .menu_btn {
     font-size: medium;
@@ -64,8 +60,7 @@ iframe {
     grid-template-rows: 5% 95%;
 }
 #temp_form {
-    margin-top: 100px;
-    padding-top: 100px;
+    margin-top: 200px;
 }
 #addForm {
     width: auto;
@@ -89,4 +84,18 @@ iframe {
 }
 .input_no {
     width: 80%;
+}
+
+.amount_title {
+    font-size: small;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 5px;
+}
+
+.community_rate {
+    font-size: small;
+    display: grid;
+    grid-template-columns: 21% auto 20%;
+    margin: 5px;
 }

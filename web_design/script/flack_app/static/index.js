@@ -122,14 +122,19 @@ function checkFilter(element) {
 
     if (filter == "district") {
         select_element.next().remove();
+        //select_element.parent().append(`
+        //    <select name="filter_district" class="form-select filter_district">
+        //        <option value="default">請選擇地區：</option>
+        //    </select>
+        //`);
+        const selected_district = select_element.parent().parent().parent().find("select[name='district'] option:selected").val();
         select_element.parent().append(`
             <select name="filter_district" class="form-select filter_district">
-                <option value="default">請選擇地區：</option>
-            </select>
-        `);
-        for (var i=0; i<district.length; i++) {
-            select_element.next().append(`<option value='${district[i][1]}'>${district[i][0]} ${district[i][1]}</option>`);
-        }
+                <option value=${selected_district} selected>${selected_district}</option>
+            </select>`);
+        //for (var i=0; i<district.length; i++) {
+        //    select_element.next().append(`<option value='${district[i][1]}'>${district[i][0]} ${district[i][1]}</option>`);
+        //}
     }
     else if (filter == "facility") {
         select_element.next().remove();
@@ -199,8 +204,7 @@ window.onload = async ()=>{
     }
 }
 
-
-
+//might have to add asyncalize
 function submitQuery(element) {
     var target_form = $(`#${element.id}`).parent();
     var query = decodeURI(target_form.serialize());
@@ -231,8 +235,21 @@ function submitQuery(element) {
             //document.location.reload(true);
             console.log(msg);
         }).always(() => {
+            getAllData(url, element);
             console.log("Close connection with flask api server");
         });
+    }
+}
+
+async function getAllData(url, element) {
+    try {
+        const data = await fetch(url).then(res => {
+            return res.json();
+        });
+        showResult(data, element);
+    }
+    catch(e) {
+        console.log(e);
     }
 }
 

@@ -103,10 +103,35 @@ def query():
         filter = request.args["filter"]
         if "filter_district" in request.args:
             filter_district = request.args["filter_district"]
-            connection.queryAllResult(district, street+number, range, filter, filter_district)
+            result = connection.queryResult(district, street+number, range, filter, filter_district)
         elif "filter_facility" in request.args:
             filter_facility = request.args["filter_facility"]
-            connection.queryAllResult(district, street+number, range, filter, filter_facility)
+            result = connection.queryResult(district, street+number, range, filter, filter_facility)
+
+    return result
+
+@app.route("/query/getall", methods=["GET"])
+@cross_origin(allow_headers=["content-type"]) #"authentication"
+def queryGetAll():
+    if "district" in request.args:
+        district = request.args["district"]
+    else:
+        return "Error: incorrect district, please enter again."
+    
+    if "street" in request.args:
+        street = request.args["street"]
+    else:
+        return "Error: incorrect street, please enter again."
+    
+    if "number" in request.args:
+        number = request.args["number"]
+    else:
+        return "Error: incorrect district, please enter again."
+    
+    if "range" in request.args:
+        range = request.args["range"]
+    else:
+        return "Error: incorrect range, please enter again."
     
     result = connection.queryAllResult(district, street+number, range)
 

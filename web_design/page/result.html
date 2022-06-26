@@ -5,17 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Result Page template</title>
-    <link rel="stylesheet" href="../css/result.css">
+    <link rel="stylesheet" href="../static/result.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="../script/result.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
 <body>
     <div class="container">
         <div id="header">
             <div id="menu">
-                <button class="menu_btn" id="homePage">Home page</button>
-                <button class="menu_btn" id="aboutUs">About us</button>
-                <button class="menu_btn" id="reference">Reference</button>
+                <div><button class="btn btn-outline-success" id="homePage" onclick="redirect(this)">Home page</button></div>
+                <div><button class="btn btn-outline-success" id="report" onclick="redirect(this)">Report</button></div>
                 <hr id="menu_hr">
             </div>
         </div>
@@ -79,5 +79,60 @@
             </div>
         </div>
     </div>
+</div>
+<div class="test">
+    <div>
+        <div class="amount_title">
+            <p class="amount_entertain">消費與娛樂：</p>
+            <p class="amount_entertain">百貨公司：</p>
+            <p class="amount_entertain">商圈：</p>
+            <p class="amount_entertain">大賣場：</p>
+            <p class="amount_entertain">地下商店街：</p>
+        </div>
+        <div class="amount_title">
+            <p class="amount_traffic">公車站：</p>
+            <p class="amount_traffic">捷運站：</p>
+            <p class="amount_traffic">YouBike站：</p>
+            <p class="amount_traffic">火車站：</p>
+            <p class="amount_traffic">高鐵站：</p>
+        </div>
+        <div class="amount_title">
+            <p class="amount_activity">區民運動中心：</p>
+            <p class="amount_activity">健身房：</p>
+            <p class="amount_activity">河濱公園：</p>
+        </div>
+        <div class="amount_title">
+            <p class="amount_meal">餐廳：</p>
+            <p class="amount_meal">綠色餐廳：</p>
+            <p class="amount_meal">超市：</p>
+            <p class="amount_meal">夜市：</p>
+        </div>
+        <div class="amount_title">
+            <p class="amount_medical">醫院：</p>
+            <p class="amount_medical">診所：</p>
+        </div>
+        <div class="amount_title">
+            <p class="amount_enviorment">公園：</p>
+            <p class="amount_enviorment">行道樹：</p>
+        </div>
+        <div class="amount_title">
+            <p class="amount_petFriendly">寵物診所：</p>
+            <p class="amount_petFriendly">寵物公園：</p>
+            <p class="amount_petFriendly">寵物餐廳：</p>
+        </div>
+        <div class="amount_title">
+            <p class="amount_public_facility">垃圾車站點：</p>
+        </div>
+        <div>社區評分：</div>
+        <div class="community_rate">
+            <div>娛樂：</div><div class="progress-bar" role="progressbar" style="width: 5%; background-color: pink;">0</div>
+            <div>食：</div><div class="progress-bar" role="progressbar" style="width: 5%; background-color: orange;">0</div>
+            <div>交通：</div><div class="progress-bar" role="progressbar" style="width: 5%; background-color: yellow;">0</div>
+            <div>綠化：</div><div class="progress-bar" role="progressbar" style="width: 5%; background-color: limegreen;">0</div>
+            <div>治安：</div><div class="progress-bar" role="progressbar" style="width: 5%; background-color: lightblue;">0</div>
+            <div>寵物友善：</div><div class="progress-bar" role="progressbar" style="width: 5%; background-color: burlywood;">0</div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

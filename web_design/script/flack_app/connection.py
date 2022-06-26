@@ -98,7 +98,7 @@ def getCoordinates(address):
 
     return [lat, lng]
     
-def queryAllResult(district, street, range, filter, filter_type):
+def queryResult(district, street, range, filter, filter_condition):
     coordinate = getCoordinates(f"臺北市{district}{street}號")
     user_lat = coordinate[0]
     user_lng = coordinate[1]
@@ -111,49 +111,83 @@ def queryAllResult(district, street, range, filter, filter_type):
         conn = _mysql.connect(host, username, password, database)
 
     if (filter == "district"):
-        entertain_result = queryEntertainment(range, user_lat, user_lng, filter_type)
-        traffic_result = queryTraffic(range, user_lat, user_lng, filter_type)
-        sport_result = querySport(range, user_lat, user_lng, filter_type)
-        catering_result = queryCatering(range, user_lat,user_lng, filter_type)
-        medical_result = queryMedical(range, user_lat, user_lng, filter_type)
-        pet_result = queryPatFriendly(range, user_lat, user_lng, filter_type)
-        secuity_result = querySecuity(range, user_lat, user_lng, filter_type)
-        enviorment_result = queryGreenEnviroment(range, user_lat, user_lng, filter_type)
-        garbageCar_result = queryGarbageCar(range, user_lat, user_lng, filter_type)
-        totalCount = queryTotal()
+        entertain_result = queryEntertainment(range, user_lat, user_lng, filter_condition)
+        traffic_result = queryTraffic(range, user_lat, user_lng, filter_condition)
+        sport_result = querySport(range, user_lat, user_lng, filter_condition)
+        catering_result = queryCatering(range, user_lat,user_lng, filter_condition)
+        medical_result = queryMedical(range, user_lat, user_lng, filter_condition)
+        pet_result = queryPatFriendly(range, user_lat, user_lng, filter_condition)
+        secuity_result = querySecuity(range, user_lat, user_lng, filter_condition)
+        enviorment_result = queryGreenEnviroment(range, user_lat, user_lng, filter_condition)
+        garbageCar_result = queryGarbageCar(range, user_lat, user_lng, filter_condition)
+        all_result = [entertain_result, traffic_result, sport_result, catering_result, medical_result, pet_result, enviorment_result, secuity_result, garbageCar_result]
+        return json.dumps(all_result, ensure_ascii=False)
     elif (filter == "facility"):
-        if (filter_type == "消費與娛樂"):
-            entertain_result = queryEntertainment(range, user_lat, user_lng)
-        elif (filter_type == "交通"):
-            traffic_result = queryTraffic(range, user_lat, user_lng)
-        elif (filter_type == "運動場所"):
-            sport_result = querySport(range, user_lat, user_lng)
-        elif (filter_type == "醫療場所"):
-            medical_result = queryMedical(range, user_lat, user_lng)
-        elif (filter_type == "餐飲"):
-            catering_result = queryCatering(range, user_lat,user_lng)
-        elif (filter_type == "寵物友善"):
-            pet_result = queryPatFriendly(range, user_lat, user_lng)
-        elif (filter_type == "綠色環境"):
-            enviorment_result = queryGreenEnviroment(range, user_lat, user_lng)
-        elif (filter_type == "治安"):
-            secuity_result = querySecuity(range, user_lat, user_lng)
-        elif (filter_type == "垃圾車站點"):
-            garbageCar_result = queryGarbageCar(range, user_lat, user_lng)
+        if (filter_condition == "消費與娛樂"):
+            entertain_result = queryEntertainment(range, user_lat, user_lng, "none")
+            return json.dumps(entertain_result, ensure_ascii=False)
+        elif (filter_condition == "交通"):
+            traffic_result = queryTraffic(range, user_lat, user_lng, "none")
+            return json.dumps(traffic_result, ensure_ascii=False)
+        elif (filter_condition == "運動場所"):
+            sport_result = querySport(range, user_lat, user_lng, "none")
+            return json.dumps(sport_result, ensure_ascii=False)
+        elif (filter_condition == "醫療場所"):
+            medical_result = queryMedical(range, user_lat, user_lng, "none")
+            return json.dumps(medical_result, ensure_ascii=False)
+        elif (filter_condition == "餐飲"):
+            catering_result = queryCatering(range, user_lat,user_lng, "none")
+            return json.dumps(catering_result, ensure_ascii=False)
+        elif (filter_condition == "寵物友善"):
+            pet_result = queryPatFriendly(range, user_lat, user_lng, "none")
+            return json.dumps(pet_result, ensure_ascii=False)
+        elif (filter_condition == "綠色環境"):
+            enviorment_result = queryGreenEnviroment(range, user_lat, user_lng, "none")
+            return json.dumps(enviorment_result, ensure_ascii=False)
+        elif (filter_condition == "治安"):
+            secuity_result = querySecuity(range, user_lat, user_lng, "none")
+            return json.dumps(secuity_result, ensure_ascii=False)
+        elif (filter_condition == "垃圾車站點"):
+            garbageCar_result = queryGarbageCar(range, user_lat, user_lng, "none")
+            return json.dumps(garbageCar_result, ensure_ascii=False)
         else:
-            print("cant pass utf-8 chinese")
-    #update 06/26
-
-    totalCount = queryTotal()
+            return "cant pass utf-8 chinese"
 
     #conn.close()
 
+def queryAllResult(district, street, range):
+    coordinate = getCoordinates(f"臺北市{district}{street}號")
+    user_lat = coordinate[0]
+    user_lng = coordinate[1]
+
+    entertain_result = queryEntertainment(range, user_lat, user_lng, "none")
+    traffic_result = queryTraffic(range, user_lat, user_lng, "none")
+    sport_result = querySport(range, user_lat, user_lng, "none")
+    catering_result = queryCatering(range, user_lat,user_lng, "none")
+    medical_result = queryMedical(range, user_lat, user_lng, "none")
+    pet_result = queryPatFriendly(range, user_lat, user_lng, "none")
+    secuity_result = querySecuity(range, user_lat, user_lng, "none")
+    enviorment_result = queryGreenEnviroment(range, user_lat, user_lng, "none")
+    garbageCar_result = queryGarbageCar(range, user_lat, user_lng, "none")
+    totalCount = queryTotal()
+
     all_result = [entertain_result, traffic_result, sport_result, catering_result, medical_result, pet_result, enviorment_result, secuity_result, garbageCar_result, totalCount]
-    
+
     return json.dumps(all_result, ensure_ascii=False)
 
-def querySport(range, user_lat, user_lng):
+def querySport(range, user_lat, user_lng, filter_condition):
 
+    if (filter_condition == "none"):
+        sport_gymroom_statement = f"""SELECT district, gym_name, street, phone, business_hr, ST_distance_sphere( point({user_lng}, {user_lat}), point(`longitude`, `latitude`) )/1000 
+        AS distance_in_KM FROM (SELECT * FROM `sport_gym` NATURAL JOIN `sport_gym_brand` WHERE district = '{filter_condition}') AS temptable HAVING distance_in_KM <= {range} ORDER BY `distance_in_KM` ASC"""
+        
+        sport_activity_center_statement = f"""SELECT district, name, street, ST_distance_sphere( point({user_lng}, {user_lat}), point(`longitude`, `latitude`) )/1000 
+        AS distance_in_KM FROM (SELECT * FROM `sport_activity_center` WHERE district = '{filter_condition}') AS temptable HAVING distance_in_KM <= {range} ORDER BY `distance_in_KM` ASC"""
+
+        sport_riverside_park_statement = f"""SELECT district, name, river, parkinglot, ST_distance_sphere( point({user_lng}, {user_lat}), point(`longitude`, `latitude`) )/1000 
+        AS distance_in_KM FROM (SELECT * FROM `sport_riverside_park` NATURAL JOIN `river` WHERE district = '{filter_condition}') AS temptable HAVING distance_in_KM <= {range} ORDER BY `distance_in_KM` ASC"""
+
+    #if condition is not "none", continue the following statement
     sport_gymroom_statement = f"""SELECT district, gym_name, street, phone, business_hr, ST_distance_sphere( point({user_lng}, {user_lat}), point(`longitude`, `latitude`) )/1000 
     AS distance_in_KM FROM (SELECT * FROM `sport_gym` NATURAL JOIN `sport_gym_brand`) AS temptable HAVING distance_in_KM <= {range} ORDER BY `distance_in_KM` ASC"""
     
@@ -198,8 +232,27 @@ def querySport(range, user_lat, user_lng):
     return sport_result
 
 
-def querySecuity(range, user_lat, user_lng):
+def querySecuity(range, user_lat, user_lng, filter_condition):
 
+    if (filter_condition == "none"):
+        crime_bike_statement = f"""SELECT district, type, street, date, time, ST_distance_sphere( point({user_lng}, {user_lat}), point(`longitude`, `latitude`) )/1000 AS distance_in_KM 
+        FROM (SELECT * FROM `case_location` NATURAL JOIN `case_type` WHERE type = "自行車竊盜" AND district = '{filter_condition}') AS temptable HAVING distance_in_KM <= {range} ORDER BY `distance_in_KM` ASC"""
+
+        crime_motor_statement = f"""SELECT district, type, street, date, time, ST_distance_sphere( point({user_lng}, {user_lat}), point(`longitude`, `latitude`) )/1000 AS distance_in_KM 
+        FROM (SELECT * FROM `case_location` NATURAL JOIN `case_type` WHERE type = "機車竊盜" AND district = '{filter_condition}') AS temptable HAVING distance_in_KM <= {range} ORDER BY `distance_in_KM` ASC"""
+
+        crime_car_statement = f"""SELECT district, type, street, date, time, ST_distance_sphere( point({user_lng}, {user_lat}), point(`longitude`, `latitude`) )/1000 AS distance_in_KM 
+        FROM (SELECT * FROM `case_location` NATURAL JOIN `case_type` WHERE type = "汽車竊盜" AND district = '{filter_condition}') AS temptable HAVING distance_in_KM <= {range} ORDER BY `distance_in_KM` ASC"""
+        
+        crime_house_burglary_statement = f"""SELECT district, type, street, date, time, ST_distance_sphere( point({user_lng}, {user_lat}), point(`longitude`, `latitude`) )/1000 AS distance_in_KM 
+        FROM (SELECT * FROM `case_location` NATURAL JOIN `case_type` WHERE type = "住宅竊盜" AND district = '{filter_condition}') AS temptable HAVING distance_in_KM <= {range} ORDER BY `distance_in_KM` ASC"""
+        
+        crime_robbery_statement = f"""SELECT district, type, street, date, time, ST_distance_sphere( point({user_lng}, {user_lat}), point(`longitude`, `latitude`) )/1000 AS distance_in_KM 
+        FROM (SELECT * FROM `case_location` NATURAL JOIN `case_type` WHERE type = "隨機強盜" AND district = '{filter_condition}') AS temptable HAVING distance_in_KM <= {range} ORDER BY `distance_in_KM` ASC"""
+        
+        crime_burglary_statement = f"""SELECT district, type, street, date, time, ST_distance_sphere( point({user_lng}, {user_lat}), point(`longitude`, `latitude`) )/1000 AS distance_in_KM 
+        FROM (SELECT * FROM `case_location` NATURAL JOIN `case_type` WHERE type = "隨機搶奪" AND district = '{filter_condition}') AS temptable HAVING distance_in_KM <= {range} ORDER BY `distance_in_KM` ASC"""
+    #if condition is not none, continue the following statement
     crime_bike_statement = f"""SELECT district, type, street, date, time, ST_distance_sphere( point({user_lng}, {user_lat}), point(`longitude`, `latitude`) )/1000 AS distance_in_KM 
     FROM (SELECT * FROM `case_location` NATURAL JOIN `case_type` WHERE type = "自行車竊盜") AS temptable HAVING distance_in_KM <= {range} ORDER BY `distance_in_KM` ASC"""
 
@@ -272,7 +325,15 @@ def querySecuity(range, user_lat, user_lng):
 
     return crime_result
 
-def queryMedical(range, user_lat, user_lng):
+def queryMedical(range, user_lat, user_lng, filter_condition):
+
+    if (filter_condition == "none"):
+        medical_hospital_statement = f"""SELECT district, name, street, ST_distance_sphere( point({user_lng}, {user_lat}), point(`longitude`, `latitude`) )/1000
+        AS distance_in_KM FROM (SELECT * FROM `medical_hospital` WHERE district = '{filter_condition}') AS temptable HAVING distance_in_KM <= {range} ORDER BY `distance_in_KM` ASC"""
+
+        medical_ALLclinic_statement = f"""SELECT district, name, street, category, ST_distance_sphere( point({user_lng}, {user_lat}), point(`longitude`, `latitude`) )/1000 
+        AS distance_in_KM FROM (SELECT * FROM `medical_clinic_info` NATURAL JOIN `medical_clinic_category` WHERE district = '{filter_condition}') AS temptable HAVING distance_in_KM <= {range} ORDER BY `distance_in_KM` ASC"""
+    #if condition is not none, continue thefollowing statement
     medical_hospital_statement = f"""SELECT district, name, street, ST_distance_sphere( point({user_lng}, {user_lat}), point(`longitude`, `latitude`) )/1000
     AS distance_in_KM FROM (SELECT * FROM `medical_hospital`) AS temptable HAVING distance_in_KM <= {range} ORDER BY `distance_in_KM` ASC"""
 
@@ -334,7 +395,25 @@ def queryMedical(range, user_lat, user_lng):
 
     return medical_result
 
-def queryTraffic(range, user_lat, user_lng):
+def queryTraffic(range, user_lat, user_lng, filter_condition):
+
+    if (filter_condition == "none"):
+        traffic_youbike_statement = f"""SELECT district, name, street, ST_distance_sphere( point({user_lng}, {user_lat}), point(`longitude`, `latitude`) )/1000 
+        AS distance_in_KM FROM (SELECT * FROM `traffic_youbike_station` WHERE district = '{filter_condition}') AS temptable HAVING distance_in_KM <= {range} ORDER BY `distance_in_KM` ASC"""
+
+        traffic_metro_statement = f"""SELECT district, name, street, route_name, ST_distance_sphere( point({user_lng}, {user_lat}), point(`longitude`, `latitude`) )/1000 
+        AS distance_in_KM FROM (SELECT * FROM `traffic_metro_station_info` NATURAL JOIN `traffic_metro_route` NATURAL JOIN `traffic_metro_station_route` WHERE district = '{filter_condition}') AS temptable HAVING distance_in_KM <= {range} ORDER BY `distance_in_KM` ASC"""
+ 
+        traffic_train_statement = f"""SELECT district, name, street, ST_distance_sphere( point({user_lng}, {user_lat}), point(`longitude`, `latitude`) )/1000 
+        AS distance_in_KM FROM (SELECT * FROM `traffic_train_station` WHERE district = '{filter_condition}') AS temptable HAVING distance_in_KM <= {range} ORDER BY `distance_in_KM` ASC"""
+
+        traffic_highSpeedRail_statement = f"""SELECT district, name, street, ST_distance_sphere( point({user_lng}, {user_lat}), point(`longitude`, `latitude`) )/1000 
+        AS distance_in_KM FROM (SELECT * FROM `traffic_highspeedrail_station` WHERE district = '{filter_condition}') AS temptable HAVING distance_in_KM <= {range} ORDER BY `distance_in_KM` ASC"""
+
+        traffic_busstop_statement = f"""SELECT name, ST_distance_sphere( point({user_lng}, {user_lat}), point(`longitude`, `latitude`) )/1000 
+        AS distance_in_KM FROM (SELECT * FROM `traffic_busstop` WHERE district = '{filter_condition}') AS temptable HAVING distance_in_KM <= {range} ORDER BY `distance_in_KM` ASC"""
+
+    #if condition is not "none", continue following statement
 
     traffic_youbike_statement = f"""SELECT district, name, street, ST_distance_sphere( point({user_lng}, {user_lat}), point(`longitude`, `latitude`) )/1000 
     AS distance_in_KM FROM (SELECT * FROM `traffic_youbike_station`) AS temptable HAVING distance_in_KM <= {range} ORDER BY `distance_in_KM` ASC"""
@@ -398,8 +477,16 @@ def queryTraffic(range, user_lat, user_lng):
 
     return traffic_result
 
-def queryCatering(range, user_lat, user_lng):
+def queryCatering(range, user_lat, user_lng, filter_condition):
 
+    if (filter_condition == "none"):
+        catering_green_resteruant_statement = f"""SELECT district, name, street, tel, ST_distance_sphere( point({user_lng}, {user_lat}), point(`longitude`, `latitude`) )/1000 
+        AS distance_in_KM FROM (SELECT * FROM `meal_green_resteruant` NATURAL JOIN `meal_green_resteruant_phone` WHERE district = '{filter_condition}') AS temptable HAVING distance_in_KM <= {range} ORDER BY `distance_in_KM` ASC"""
+
+        catering_night_market_statement = f"""SELECT district, name, street, ST_distance_sphere( point({user_lng}, {user_lat}), point(`longitude`, `latitude`) )/1000 
+        AS distance_in_KM FROM (SELECT * FROM `meal_night_market` WHERE district = '{filter_condition}') AS temptable HAVING distance_in_KM <= {range} ORDER BY `distance_in_KM` ASC"""
+
+    #if condition is not "none", continue the following statement
     catering_green_resteruant_statement = f"""SELECT district, name, street, tel, ST_distance_sphere( point({user_lng}, {user_lat}), point(`longitude`, `latitude`) )/1000 
     AS distance_in_KM FROM (SELECT * FROM `meal_green_resteruant` NATURAL JOIN `meal_green_resteruant_phone`) AS temptable HAVING distance_in_KM <= {range} ORDER BY `distance_in_KM` ASC"""
 
@@ -432,8 +519,15 @@ def queryCatering(range, user_lat, user_lng):
 
     return catering_result
 
-def queryGreenEnviroment(range, user_lat, user_lng):
-
+def queryGreenEnviroment(range, user_lat, user_lng, filter_condition):
+    
+    if (filter_condition == "none"):
+        enviorment_park_statement = f"""SELECT district, name, street, ST_distance_sphere( point({user_lng}, {user_lat}), point(`longitude`, `latitude`) )/1000 
+        AS distance_in_KM FROM (SELECT * FROM `enviorment_park` WHERE district = '{filter_condition}') AS temptable HAVING distance_in_KM <= {range} ORDER BY `distance_in_KM` ASC"""
+        
+        enviorment_sidewalk_tree_statement = f"""SELECT district, tree_id, street, ST_distance_sphere( point({user_lng}, {user_lat}), point(`longitude`, `latitude`) )/1000 
+        AS distance_in_KM FROM (SELECT * FROM `enviorment_sidewalk_tree` WHERE district = '{filter_condition}') AS temptable HAVING distance_in_KM <= {range} ORDER BY `distance_in_KM` ASC"""
+    #if condition is not none, continue the following statement
     enviorment_park_statement = f"""SELECT district, name, street, ST_distance_sphere( point({user_lng}, {user_lat}), point(`longitude`, `latitude`) )/1000 
     AS distance_in_KM FROM (SELECT * FROM `enviorment_park`) AS temptable HAVING distance_in_KM <= {range} ORDER BY `distance_in_KM` ASC"""
     
@@ -466,8 +560,22 @@ def queryGreenEnviroment(range, user_lat, user_lng):
 
     return enviorment_result
 
-def queryEntertainment(range, user_lat, user_lng):
+def queryEntertainment(range, user_lat, user_lng, filter_condition):
 
+    if (filter_condition == "none"):
+        entertain_shopping_mall_statement = f"""SELECT district, name, street, type, ST_distance_sphere( point({user_lng}, {user_lat}), point(`longitude`, `latitude`) )/1000 
+        AS distance_in_KM FROM (SELECT * FROM `entertain_shopping_mall` NATURAL JOIN `entertain_shopping_mall_type` WHERE district = '{filter_condition}') AS temptable HAVING distance_in_KM <= {range} ORDER BY `distance_in_KM` ASC"""
+
+        entertain_market_statement = f"""SELECT district, name, street, type, ST_distance_sphere( point({user_lng}, {user_lat}), point(`longitude`, `latitude`) )/1000 
+        AS distance_in_KM FROM (SELECT * FROM `entertain_market` NATURAL JOIN `entertain_market_type` WHERE district = '{filter_condition}') AS temptable HAVING distance_in_KM <= {range} ORDER BY `distance_in_KM` ASC"""
+
+        entertain_business_district_statement = f"""SELECT district, name, street, ST_distance_sphere( point({user_lng}, {user_lat}), point(`longitude`, `latitude`) )/1000 
+        AS distance_in_KM FROM (SELECT * FROM `entertain_business_district` WHERE district = '{filter_condition}') AS temptable HAVING distance_in_KM <= {range} ORDER BY `distance_in_KM` ASC"""
+
+        entertain_underground_market_statement = f"""SELECT district, name, street,  ST_distance_sphere( point({user_lng}, {user_lat}), point(`longitude`, `latitude`) )/1000 
+        AS distance_in_KM FROM (SELECT * FROM `entertain_underground_market` WHERE district = '{filter_condition}') AS temptable HAVING distance_in_KM <= {range} ORDER BY `distance_in_KM` ASC"""
+
+    #if filter is not "none", continue following statement
     entertain_shopping_mall_statement = f"""SELECT district, name, street, type, ST_distance_sphere( point({user_lng}, {user_lat}), point(`longitude`, `latitude`) )/1000 
     AS distance_in_KM FROM (SELECT * FROM `entertain_shopping_mall` NATURAL JOIN `entertain_shopping_mall_type`) AS temptable HAVING distance_in_KM <= {range} ORDER BY `distance_in_KM` ASC"""
 
@@ -522,7 +630,21 @@ def queryEntertainment(range, user_lat, user_lng):
     return entertain_result
 
 
-def queryPatFriendly(range, user_lat, user_lng):
+def queryPatFriendly(range, user_lat, user_lng, filter_condition):
+
+    if(filter_condition == "none"):
+        pet_clinic_statement = f"""SELECT district, name, street, ST_distance_sphere( point({user_lng}, {user_lat}), point(`longitude`, `latitude`) )/1000 
+        AS distance_in_KM FROM (SELECT * FROM `pet_clinic` WHERE district = '{filter_condition}') AS temptable HAVING distance_in_KM <= {range} ORDER BY `distance_in_KM` ASC"""
+
+        pet_hospital_statement = f"""SELECT district, name, street, ST_distance_sphere( point({user_lng}, {user_lat}), point(`longitude`, `latitude`) )/1000 
+        AS distance_in_KM FROM (SELECT * FROM `pet_hospital` WHERE district = '{filter_condition}') AS temptable HAVING distance_in_KM <= {range} ORDER BY `distance_in_KM` ASC"""
+
+        pet_park_statement = f"""SELECT district, name, street, ST_distance_sphere( point({user_lng}, {user_lat}), point(`longitude`, `latitude`) )/1000 
+        AS distance_in_KM FROM (SELECT * FROM `pet_park` WHERE district = '{filter_condition}') AS temptable HAVING distance_in_KM <= {range} ORDER BY `distance_in_KM` ASC"""
+
+        pet_resteruant_statement = f"""SELECT district, name, street, ST_distance_sphere( point({user_lng}, {user_lat}), point(`longitude`, `latitude`) )/1000 
+        AS distance_in_KM FROM (SELECT * FROM `pet_resteruant` WHERE district = '{filter_condition}') AS temptable HAVING distance_in_KM <= {range} ORDER BY `distance_in_KM` ASC"""
+    #if condition is not none, continue the following statement
     pet_clinic_statement = f"""SELECT district, name, street, ST_distance_sphere( point({user_lng}, {user_lat}), point(`longitude`, `latitude`) )/1000 
     AS distance_in_KM FROM (SELECT * FROM `pet_clinic`) AS temptable HAVING distance_in_KM <= {range} ORDER BY `distance_in_KM` ASC"""
 
@@ -573,7 +695,13 @@ def queryPatFriendly(range, user_lat, user_lng):
 
     return pet_result
 
-def queryGarbageCar(range, user_lat, user_lng):
+def queryGarbageCar(range, user_lat, user_lng, filter_condition):
+
+    if (filter_condition == "none"):
+        statement = f"""SELECT village, time_arrived, time_depart, location, ST_distance_sphere( point({user_lng}, {user_lat}), point(`longitude`, `latitude`) )/1000 
+        AS distance_in_KM FROM (SELECT * FROM `garbage_truck` NATURAL JOIN `garbage_truck_location` WHERE district = '{filter_condition}') AS temptable HAVING distance_in_KM <= {range} ORDER BY `distance_in_KM` ASC"""
+    
+    #if condition is not none, continue the folloing statement
     statement = f"""SELECT village, time_arrived, time_depart, location, ST_distance_sphere( point({user_lng}, {user_lat}), point(`longitude`, `latitude`) )/1000 
     AS distance_in_KM FROM (SELECT * FROM `garbage_truck` NATURAL JOIN `garbage_truck_location`) AS temptable HAVING distance_in_KM <= {range} ORDER BY `distance_in_KM` ASC"""
 
